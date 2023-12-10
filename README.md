@@ -1,2 +1,21 @@
-# Configure-AD
-Configuration of Active Directory
+Hey guys, in this video, we're going to install Active Directory through Microsoft Azure. We'll have one machine set up as the Windows server to host the Active Directory, and then we'll have a second machine connected to the Active Directory through a shared domain. We will kick things off by creating a Resource Group that we'll be using for both of the virtual machines. I'm just going to call it JG RG1.
+
+Next, what I want to do is create my first domain controller. I'll call it GG DC1. The image that we're going to use here is going to be Windows Server 2019. I will note here that we want to maintain the same region between the two virtual machines, US East, and the Zone Zone one, just going to keep that the same. And with the virtual CPUs, I just want to keep it to two virtual CPUs, even though it's going to run fairly slow with a free version of Microsoft Azure. I'm limited to four total virtual CPUs, so between the two virtual machines, I'm going to split it two and two.
+
+After creating my username and password, I'm going to take a look at our networking. We have to have the same VNet between the two virtual machines. I'm going to create it here with this first domain controller, and I'll use the same virtual network on the client one.
+
+Now, I want to jump back into my DC JG1 virtual machine, and we're going to take a look at the virtual network that was created. We'll see that it's DC JG1 VNet, and we'll be using that as we create our second virtual machine. So let's go ahead and create our second virtual machine. We'll use the same Resource Group as before. We're going to call our virtual machine J Client One, and we're going to use Windows 10 Pro as our image. We're going to use two virtual CPUs. I want to use the username JagilmorLab4, and we can use password one.
+
+Now we're going to jump into the networking and focus on the fact that our virtual network is DC JG1. Just going to make sure that it's the same shared virtual network as our primary domain controller. And now that our virtual network is established, we can go ahead and create the rest of the virtual machine. It will take a little bit of time to create and deploy, so we'll fast forward through that.
+
+Now we can jump into our first domain controller. While our other virtual machine is creating, I want to jump into the networking, and I want to change the IP configuration of this domain controller to be a static IP. As it's an Active Directory host, I don't want the primary private IP address ever to change, so we'll switch it from Dynamic to static.
+
+So now, what we can finally do is connect to our first domain controller. I'm going to jump into the Azure portal into my DC JG1 and find my public IP address as well as my username and password, and then we can finally remote desktop to connect into our primary domain controller. And as we connect to the remote desktop connection for the first time, it's going to take a little bit of time for the virtual machine to load for the first time, so I'll go ahead and fast forward.
+
+Alright, now that we're finally logged into our first domain controller, we can check back in on the Azure portal and see if our second virtual machine has deployed properly. We're going to overview, just make sure that we're in the same location, and we will double-check to make sure that the VNets all ended up on the same.
+
+Alright, so now we can see here in the location we're both on the East US. I'm going to open up JG Client One and just make sure that the VNet matches with my domain controller, and we're both on DC JG1, so everything's working perfectly.
+
+So the next thing I want to do is note that my domain controller private IP address is 10.0.0.4. We will use this in a ping connection here after we remote connect into JG Client One. I'm going to look at my username and password here shortly, and often times it says that the VM agent is not available, but I'm going to go ahead and try to connect anyway, and yeah, it looks like it's going to let me in.
+
+So, as we connected the Client One machine, I'm going to go back to my domain controller, run a couple of commands, 'whoami' as well as 'ipconfig', just to kind of double-check, make sure we're online correctly. And now we're going to wait a little bit for the Client One to finish loading, and afterwards on Client One, we want to pull up the command line interface and let's go ahead and run the
