@@ -1,5 +1,7 @@
 # Azure Active Directory Setup Tutorial
 
+[Watch the Tutorial on YouTube](https://youtu.be/5IE9w-UOhsU)
+
 ## Overview
 This tutorial provides a comprehensive guide on setting up Active Directory in Microsoft Azure. It covers setting up a Windows server to host Active Directory, configuring a client machine to connect through a shared domain, and various other essential configurations and best practices.
 
